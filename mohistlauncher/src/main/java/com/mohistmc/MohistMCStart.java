@@ -26,7 +26,6 @@ import com.mohistmc.feature.DefaultLibraries;
 import com.mohistmc.feature.ExceptionHandler;
 import com.mohistmc.i18n.i18n;
 import com.mohistmc.tools.JarTool;
-import com.mohistmc.tools.Logo;
 import com.mohistmc.tools.MojangEulaUtil;
 import com.mohistmc.tools.ZipUtil;
 import com.mohistmc.util.DataParser;
@@ -51,6 +50,14 @@ public class MohistMCStart {
         return (MohistMCStart.class.getPackage().getImplementationVersion() != null) ? MohistMCStart.class.getPackage().getImplementationVersion() : "unknown";
     }
 
+    public static String asMohist() {
+        return "  _____  ____   ___  __  __ \n" +
+                " |_   _||  _ \\ |_ _||  \\//  |\n" +
+                "   | |  | |_) | | | | |\\/| |\n" +
+                "   | |  |  _ <  | | | |  | |\n" +
+                "   |_|  |_| \\\\_|___||_|  |_|";
+    }
+
     public static void main(String[] args) throws Exception {
         mainArgs.addAll(List.of(args));
         jarTool = new JarTool(MohistMCStart.class);
@@ -63,7 +70,7 @@ public class MohistMCStart {
         }
         if (MohistConfigUtil.INSTALLATIONFINISHED() && MohistConfigUtil.aBoolean("mohist.show_logo", true)) {
             System.out.printf("%n%s%n%s - %s, Java(%s) %s PID: %s%n",
-                    Logo.asMohist(),
+                    asMohist(),
                     i18n.as("mohist.launch.welcomemessage"),
                     getVersion(),
                     System.getProperty("java.class.version"),
@@ -71,13 +78,11 @@ public class MohistMCStart {
                     ManagementFactory.getRuntimeMXBean().getName().split("@")[0]
             );
             if (i18n.isCN()) {
-                System.out.println("+------------------------------------------------------+");
-                System.out.println("|                                                      |");
-                System.out.println("| 官方交流QQ群: 570870451                              |");
-                System.out.println("| 官网(中国): https://www.mohistmc.cn/                 |");
-                System.out.println("| 爱发电: https://ifdian.net/a/MohistMC                |");
-                System.out.println("|                                                      |");
-                System.out.println("+------------------------------------------------------+");
+                System.out.println(" ");
+                System.out.println("| 你正在使用Mohist的第三方修改版 Mohist-TRIM，非官方Mohist");
+                System.out.println("| 开源地址：https://github.com/CraftAmethyst/MohistTRIM");
+                System.out.println("| 遇到任何问题请反馈到CraftAmethyst/MohistTRIM的Issue！");
+                System.out.println(" ");
             }
         }
 
