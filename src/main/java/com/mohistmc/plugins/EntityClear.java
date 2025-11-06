@@ -9,11 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.thread.NamedThreadFactory;
 import net.minecraft.world.entity.TamableAnimal;
-import net.minecraft.world.entity.player.Player;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Monster;
 
 /**
  * @author Mgazul by MohistMC
@@ -87,11 +87,13 @@ public class EntityClear {
                     String entityName = entity.getType().name();
                     String entityRegName = entity.getType().name().split("_")[0].toLowerCase() + ":*";
                     if (!MohistConfig.clear_noitem_whitelist.contains(entityName) && !MohistConfig.clear_noitem_whitelist.contains(entityRegName)&& entity.getCustomName() == null) {
-                        if (entity instanceof TamableAnimal tamable && tamable.isTame() || entity instanceof Player) {
+                        if (entity instanceof TamableAnimal tamable && tamable.isTame()) {
                            continue;
                         }
-                        entity.remove();
-                        size_noitem.addAndGet(1);
+                        if (entity instanceof Monster) {
+                            entity.remove();
+                            size_noitem.addAndGet(1);
+                        }
                     }
                 }
             }
